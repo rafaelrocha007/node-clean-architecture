@@ -2,7 +2,9 @@
   "name": "clean-node-api",
   "version": "1.1.0",
   "description": "",
-  "main": "teste.js",
+  "engines": {
+    "node": "15.x"
+  },
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
