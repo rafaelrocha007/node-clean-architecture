@@ -4,12 +4,13 @@
   "description": "",
   "engines": {
     "node": "15.x",
-    "npm": "7.6.3"
+    "npm": "^7.6.0"
   },
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
-    "up": "npm run build && docker-compose up -d",
+    "debug": "node --inspect=0.0.0.0:9222 --nolazy dist/main/server.js",
+    "up": "npm run build && docker-compose up",
     "down": "docker-compose down",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
@@ -43,6 +44,7 @@
     "lint-staged": "^10.5.3",
     "mongodb-memory-server": "^6.5.1",
     "rimraf": "^2.6.3",
+    "source-map-support": "^0.5.19",
     "supertest": "^6.0.1",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2"
