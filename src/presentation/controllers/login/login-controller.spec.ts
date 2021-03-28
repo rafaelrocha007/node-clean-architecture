@@ -1,5 +1,5 @@
 import { LoginController } from './login-controller'
-import { ok, badRequest, serverError, unauthorized } from '../../helpers/http/http-helper'
+import { badRequest, serverError, unauthorized, ok } from '../../helpers/http/http-helper'
 import { MissingParamError } from '../../errors'
 import { HttpRequest, Authentication, Validation } from './login-controller-protocols'
 import { AuthenticationModel } from '../../../domain/usecases/authentication'
@@ -22,6 +22,13 @@ const makeValidation = (): Validation => {
   return new ValidationStub()
 }
 
+const makeFakeRequest = (): HttpRequest => ({
+  body: {
+    email: 'any_email@mail.com',
+    password: 'any_password'
+  }
+})
+
 interface SutTypes {
   sut: LoginController
   authenticationStub: Authentication
@@ -38,13 +45,6 @@ const makeSut = (): SutTypes => {
     validationStub
   }
 }
-
-const makeFakeRequest = (): HttpRequest => ({
-  body: {
-    email: 'any_email@mail.com',
-    password: 'any_password'
-  }
-})
 
 describe('Login Controller', () => {
   test('Should call Authentication with correct values', async () => {
@@ -77,7 +77,7 @@ describe('Login Controller', () => {
     expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   })
 
-  test('Should call Validation with correct values', async () => {
+  test('Should call Validation with correct value', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const httpRequest = makeFakeRequest()

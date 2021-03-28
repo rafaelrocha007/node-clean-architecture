@@ -1,8 +1,8 @@
 import { DbAuthentication } from './db-authentication'
 import {
   AccountModel,
-  AuthenticationModel,
   LoadAccountByEmailRepository,
+  AuthenticationModel,
   HashComparer,
   Encrypter,
   UpdateAccessTokenRepository
