@@ -13,16 +13,23 @@ export class LoginController implements Controller {
       if (error) {
         return badRequest(error)
       }
+      console.log('passou aqui')
       const { email, password } = httpRequest.body
       const accessToken = await this.authentication.auth({
         email,
         password
       })
+      console.log('accessToken', accessToken)
+      console.log('passou auth')
       if (!accessToken) {
+        console.log('não tem token')
         return unauthorized()
       }
+      console.log('tem token')
       return ok({ accessToken })
     } catch (error) {
+      console.error(error)
+      console.log(error)
       return serverError(error)
     }
   }
