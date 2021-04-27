@@ -5,7 +5,7 @@ export const surveyAnswerSchema = {
       type: 'string'
     },
     answer: {
-      type: 'array'
+      type: 'string'
     }
   }
 }
